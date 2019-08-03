@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
@@ -10,7 +10,14 @@ import History from "./components/History";
 const formTitle = "Enquiry Form";
 
 const App = () => {
-  const [feedbacks, setFeedbacks] = useState([]);
+  const [feedbacks, setFeedbacks] = useState([{
+    "fullName": "Ritesh Firodiya",
+    "email": "firodiya.ritesh@gmail.com",
+    "phoneNo": "9226737797",
+    "message": "Hi Globant!",
+    "country": "India",
+    "gender": "Male",
+  }]);
   const submitFeedback = (feedback) => setFeedbacks([...feedbacks, feedback]);
   
   return (

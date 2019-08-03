@@ -17,7 +17,7 @@ const Input = ({ label, initialValue, setCurrentValue }) => {
                     <Form.Label>{label}</Form.Label>
                 </Col>
                 <Col>
-                    <Form.Control as="textarea" rows="3" cols="50" onChange={(e) => changeValue(e.target.value)} />
+                    <Form.Control as="textarea" rows="3" cols="50" value={value} onChange={(e) => changeValue(e.target.value)} />
                 </Col>
             </Row>
         </Form>

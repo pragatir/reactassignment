@@ -4,8 +4,6 @@ import { Button } from "react-bootstrap";
 // component
 import FormField from "./FormField";
 import Input from "./InputFormFields";
-// styles
-import "./FormWrapper.css";
 
 const mandatoryFields = ["fullName", "email", "phoneNo", "message", "country", "gender",]
 
@@ -39,7 +37,6 @@ const FormWrapper = ({ formTitle, submitFeedback }) => {
     "message": message,
     "country": country,
     "gender": gender,
-  
   };
 
   const isValid = mandatoryFields.reduce((isValid, field) => {
@@ -50,21 +47,21 @@ const FormWrapper = ({ formTitle, submitFeedback }) => {
   const validateAndSubmit = () => {
     if (isValid) submitFeedback(form);
   };
-  
+
   return (
-      <div>
+    <div className="form-header container">
       <FormField formTitle={formTitle} />
-        <br />
-        <Input formData={formData} />
-          <Button
-          variant="success"
-          type="submit"
-          value="Submit"
-          onClick={() => validateAndSubmit()}
-          size={"md"}
-          >Submit</Button>
-        </div >
+      <br />
+      <Input formData={formData} />
+      <Button
+        variant="success"
+        type="submit"
+        value="Submit"
+        onClick={() => validateAndSubmit()}
+        size={"md"}
+      >Submit</Button>
+    </div >
   );
-        };
+};
 
 export default FormWrapper;

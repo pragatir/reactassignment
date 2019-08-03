@@ -21,7 +21,7 @@ const Input = ({ label, initialValue, setCurrentValue }) => {
                     <Form.Label>{label}</Form.Label>
                 </Col>
                 <Col>
-                    <Form.Control type="number" placeholder={"0000000001"} onChange={(e) => changeValue(e.target.value)} />
+                    <Form.Control type="number" placeholder={"0000000001"} value={value} onChange={(e) => changeValue(e.target.value)} />
                 </Col>
             </Row>
         </Form>
