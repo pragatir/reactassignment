@@ -4,7 +4,6 @@ import React from "react";
 import FormField from "./FormField";
 // styles
 import "./FormWrapper.css";
-import { Form, Row, Col } from "react-bootstrap";
 
 
 const FormWrapper = ({ formTitle, submitFeedback }) => {
