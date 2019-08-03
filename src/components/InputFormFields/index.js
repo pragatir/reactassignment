@@ -30,13 +30,13 @@ const getInputField = (type) => {
 const Input = ({ formData }) => {
     return (
         <>
-            {formData.map(({ type, label, initialValue, setCurrentValue, }, index) => {
-                const Field = getInputField(type);
+            {formData.map((field, index) => {
+                const Field = getInputField(field.type);
                 return (
                     <div key={index}>
                         {
                             <>
-                                <Field label={label} initialValue={initialValue} setCurrentValue={setCurrentValue} />
+                                <Field {...field} />
                                 <br />
                             </>
                         }

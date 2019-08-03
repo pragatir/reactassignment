@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Button, ButtonGroup } from "react-bootstrap";
 
-
-const Input = ({ label, initialValue, setCurrentValue }) => {
+const Input = ({ label, initialValue, setCurrentValue, valueSet }) => {
     const [value, setValue] = useState(initialValue);
-
     const changeValue = (newValue) => {
         setCurrentValue(newValue);
         setValue(newValue)
@@ -12,14 +10,26 @@ const Input = ({ label, initialValue, setCurrentValue }) => {
 
     return (
         <Form>
-            <Row>
-                <Col>
-                    <Form.Label>{label}</Form.Label>
-                </Col>
-                <Col>
-                    <Form.Control placeholder={value} onChange={(e) => changeValue(e.target.value)} />
-                </Col>
-            </Row>
+            <fieldset>
+                <Row>
+                    <Col>
+                        <Form.Label>{label}</Form.Label>
+                    </Col>
+                    <Col>
+                        <ButtonGroup style={{ width: "100%" }} variant="light">
+                            {valueSet.map((radioLabel, i) => (
+                                <Button
+                                    variant={value === radioLabel ? "success" : "light"}
+                                    key={i}
+                                    onClick={() => changeValue(radioLabel)}
+                                    active={value === radioLabel}>
+                                    {radioLabel}
+                                </Button>
+                            ))}
+                        </ButtonGroup>
+                    </Col>
+                </Row>
+            </fieldset>
         </Form>
     )
 }

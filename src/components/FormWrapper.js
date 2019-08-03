@@ -19,7 +19,7 @@ const FormWrapper = ({ formTitle, submitFeedback }) => {
     { type: "number", label: "Phone no", initialValue: phoneNo, setCurrentValue: setPhoneNo, },
     { type: "textArea", label: "Message", initialValue: message, setCurrentValue: setMessage, },
     {
-      type: "dropdowm", label: "Country", initialValue: country, setCurrentValue: setCountry, valueSet: [
+      type: "dropdown", label: "Country", initialValue: country, setCurrentValue: setCountry, valueSet: [
         { name: "India", value: "volvo" },
         { name: "USA", value: "saab" },
         { name: "UK", value: "opel" },
