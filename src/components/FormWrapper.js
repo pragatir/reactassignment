@@ -1,10 +1,13 @@
 // vendor
 import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 // component
 import FormField from "./FormField";
 import Input from "./InputFormFields";
 // styles
 import "./FormWrapper.css";
+
+const mandatoryFields = ["fullName", "email", "phoneNo", "message", "country", "gender",]
 
 const FormWrapper = ({ formTitle, submitFeedback }) => {
   const [fullName, setFullName] = useState("");
@@ -36,58 +39,32 @@ const FormWrapper = ({ formTitle, submitFeedback }) => {
     "message": message,
     "country": country,
     "gender": gender,
-  }
+  
+  };
 
-  const submit = () => {
-    submitFeedback(form);
-  }
+  const isValid = mandatoryFields.reduce((isValid, field) => {
+    if (isValid && form[field]) return true;
+    return false;
+  }, true);
+
+  const validateAndSubmit = () => {
+    if (isValid) submitFeedback(form);
+  };
+  
   return (
-    <form action="#">
+      <div>
       <FormField formTitle={formTitle} />
-      <br />
-      <Input formData={formData} />
-      <div className="wrapper">
-        <label className="label" id="title4" htmlFor="Field4">
-          Message
-          </label>
-        <textarea
-          id="Field4"
-          name="Field4"
-          spellCheck="true"
-          rows="10"
-          cols="50"
-          tabIndex="4"
-        />
-      </div>
-      <div className="wrapper">
-        <label className="label" id="title5" htmlFor="Field5">
-          Country
-          </label>
-        <select name="states">
-          <option value="volvo">India</option>
-          <option value="saab">USA</option>
-          <option value="opel">UK</option>
-          <option value="audi">China</option>
-        </select>
-      </div>
-      <div className="wrapper">
-        <label className="label" id="title6" htmlFor="Field6">
-          Gender
-          </label>
-        <input type="radio" name="gender" value="male" /> Male
-          <input type="radio" name="gender" value="female" /> Female
-        </div>
-      <div className="wrapper submit-btn">
-        <input
-          id="Field7"
-          name="Field7"
+        <br />
+        <Input formData={formData} />
+          <Button
+          variant="success"
           type="submit"
           value="Submit"
-          tabIndex="5"
-        />
-      </div>
-    </form >
+          onClick={() => validateAndSubmit()}
+          size={"md"}
+          >Submit</Button>
+        </div >
   );
-};
+        };
 
 export default FormWrapper;

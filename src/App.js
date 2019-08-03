@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import "./App.css";
@@ -12,7 +12,7 @@ const formTitle = "Enquiry Form";
 const App = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const submitFeedback = (feedback) => setFeedbacks([...feedbacks, feedback]);
-
+  
   return (
     <div className="App">
       <NavBar title="Enquiry Site" />
