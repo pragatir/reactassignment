@@ -1,40 +1,51 @@
 // vendor
-import React from "react";
+import React, { useState } from "react";
 // component
 import FormField from "./FormField";
+import Input from "./InputFormFields";
 // styles
 import "./FormWrapper.css";
 
-
 const FormWrapper = ({ formTitle, submitFeedback }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [message, setMessage] = useState("");
+  const [country, setCountry] = useState("");
+  const [gender, setGender] = useState("");
+  const formData = [
+    { type: "simple", label: "Full Name", initialValue: fullName, setCurrentValue: setFullName, },
+    { type: "email", label: "Email", initialValue: email, setCurrentValue: setEmail, },
+    { type: "number", label: "Phone no", initialValue: phoneNo, setCurrentValue: setPhoneNo, },
+    { type: "textArea", label: "Message", initialValue: message, setCurrentValue: setMessage, },
+    {
+      type: "dropdowm", label: "Country", initialValue: country, setCurrentValue: setCountry, valueSet: [
+        { name: "India", value: "volvo" },
+        { name: "USA", value: "saab" },
+        { name: "UK", value: "opel" },
+        { name: "China", value: "audi" },
+      ]
+    },
+    { type: "radio", label: "Gender", initialValue: gender, setCurrentValue: setGender, valueSet: ["Male", "Female"] },
+  ];
+
+  const form = {
+    "fullName": fullName,
+    "email": email,
+    "phoneNo": phoneNo,
+    "message": message,
+    "country": country,
+    "gender": gender,
+  }
+
+  const submit = () => {
+    submitFeedback(form);
+  }
   return (
     <form action="#">
-      <div className="wrapper">
-        <label className="label" id="title2" htmlFor="Field2">
-          Email
-          </label>
-        <input
-          id="Field2"
-          name="Field2"
-          type="email"
-          spellCheck="false"
-          maxLength="255"
-          tabIndex="3"
-        />
-      </div>
-      <div className="wrapper">
-        <label className="label" id="title3" htmlFor="Field3">
-          Phone no
-          </label>
-        <input
-          id="Field3"
-          name="Field3"
-          type="number"
-          spellCheck="false"
-          maxLength="255"
-          tabIndex=""
-        />
-      </div>
+      <FormField formTitle={formTitle} />
+      <br />
+      <Input formData={formData} />
       <div className="wrapper">
         <label className="label" id="title4" htmlFor="Field4">
           Message
