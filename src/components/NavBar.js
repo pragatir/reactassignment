@@ -8,7 +8,6 @@ const NavBar = (props) => {
             <Navbar.Brand href="/">{props.title}</Navbar.Brand>
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/history">History</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
