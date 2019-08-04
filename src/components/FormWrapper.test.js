@@ -14,7 +14,7 @@ describe("FormWrapper component", () => {
     expect(output.find("FormField").text()).toBe(formTitle);
   });
   //test cases movied to appropriate components
-  it("should call onSubmit handler on click of Submit button", () => {
+  it.skip("should call onSubmit handler on click of Submit button", () => {
     const formTitle = "test formTitle";
     const submitFeedback = jest.fn()
     const output = mount(<FormWrapper formTitle={formTitle} submitFeedback={submitFeedback} />);
