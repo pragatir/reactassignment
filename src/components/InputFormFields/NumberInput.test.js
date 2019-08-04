@@ -8,7 +8,7 @@ import NumberInput from "./NumberInput";
 configure({ adapter: new Adapter() });
 
 describe("NumberInput component", () => {
-    it("should call change handler on change event of Full Name input control", () => {
+    it("should have label as described in input parameters", () => {
         const props = {
             label: "label",
             initialValue: "xx",
