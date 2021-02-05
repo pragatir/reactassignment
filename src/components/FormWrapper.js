@@ -1,97 +1,67 @@
 // vendor
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 // component
 import FormField from "./FormField";
-// styles
-import "./FormWrapper.css";
+import Input from "./InputFormFields";
 
-class FormWrapper extends React.Component {
-  render() {
-    return (
-      <form action="#">
-        <FormField formTitle={this.props.formTitle} />
-        <div className="wrapper">
-          <label className="label" id="title1" htmlFor="Field1">
-            Full Name
-          </label>
-          <input
-            id="Field1"
-            name="Field1"
-            type="text"
-            className="field text fn"
-            size="8"
-            tabIndex="1"
-          />
-        </div>
-        <div className="wrapper">
-          <label className="label" id="title2" htmlFor="Field2">
-            Email
-          </label>
-          <input
-            id="Field2"
-            name="Field2"
-            type="email"
-            spellCheck="false"
-            maxLength="255"
-            tabIndex="3"
-          />
-        </div>
-        <div className="wrapper">
-          <label className="label" id="title3" htmlFor="Field3">
-            Phone no
-          </label>
-          <input
-            id="Field3"
-            name="Field3"
-            type="number"
-            spellCheck="false"
-            maxLength="255"
-            tabIndex=""
-          />
-        </div>
-        <div className="wrapper">
-          <label className="label" id="title4" htmlFor="Field4">
-            Message
-          </label>
-          <textarea
-            id="Field4"
-            name="Field4"
-            spellCheck="true"
-            rows="10"
-            cols="50"
-            tabIndex="4"
-          />
-        </div>
-        <div className="wrapper">
-          <label className="label" id="title5" htmlFor="Field5">
-            Country
-          </label>
-          <select name="states">
-            <option value="volvo">India</option>
-            <option value="saab">USA</option>
-            <option value="opel">UK</option>
-            <option value="audi">China</option>
-          </select>
-        </div>
-        <div className="wrapper">
-          <label className="label" id="title6" htmlFor="Field6">
-            Gender
-          </label>
-          <input type="radio" name="gender" value="male" /> Male
-          <input type="radio" name="gender" value="female" /> Female
-        </div>
-        <div className="wrapper submit-btn">
-          <input
-            id="Field7"
-            name="Field7"
-            type="submit"
-            value="Submit"
-            tabIndex="5"
-          />
-        </div>
-      </form>
-    );
-  }
-}
+const mandatoryFields = ["fullName", "email", "phoneNo", "message", "country", "gender",]
+
+const FormWrapper = ({ formTitle, submitFeedback }) => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [message, setMessage] = useState("");
+  const [country, setCountry] = useState("");
+  const [gender, setGender] = useState("");
+  const formData = [
+    { type: "simple", label: "Full Name", initialValue: fullName, setCurrentValue: setFullName, },
+    { type: "email", label: "Email", initialValue: email, setCurrentValue: setEmail, },
+    { type: "number", label: "Phone no", initialValue: phoneNo, setCurrentValue: setPhoneNo, },
+    { type: "textArea", label: "Message", initialValue: message, setCurrentValue: setMessage, },
+    {
+      type: "dropdown", label: "Country", initialValue: country, setCurrentValue: setCountry, valueSet: [
+        { name: "India", value: "volvo" },
+        { name: "USA", value: "saab" },
+        { name: "UK", value: "opel" },
+        { name: "China", value: "audi" },
+      ]
+    },
+    { type: "radio", label: "Gender", initialValue: gender, setCurrentValue: setGender, valueSet: ["Male", "Female"] },
+  ];
+
+  const form = {
+    "fullName": fullName,
+    "email": email,
+    "phoneNo": phoneNo,
+    "message": message,
+    "country": country,
+    "gender": gender,
+  };
+
+  const isValid = mandatoryFields.reduce((isValid, field) => {
+    if (isValid && form[field]) return true;
+    return false;
+  }, true);
+
+  const validateAndSubmit = () => {
+    if (isValid) submitFeedback(form);
+  };
+
+  return (
+    <div className="form-header container">
+      <FormField formTitle={formTitle} />
+      <br />
+      <Input formData={formData} />
+      <Button
+        variant="success"
+        type="submit"
+        value="Submit"
+        onClick={() => validateAndSubmit()}
+        size={"md"}
+      >Submit</Button>
+    </div >
+  );
+};
 
 export default FormWrapper;
